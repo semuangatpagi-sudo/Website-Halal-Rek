@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halalrek - Portal Wisata Halal Surabaya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c5530, #4a7c59);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        .section {
+            display: none;
+            min-height: 80vh;
+            padding: 2rem 0;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 85, 48, 0.8), rgba(74, 124, 89, 0.8)), #e8f5e8;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #2c5530;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #2c5530;
+            margin-bottom: 1rem;
+        }
+
+        /* Exploration Section */
+        .exploration {
+            background: #f8fdf8;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid #4a7c59;
+            color: #4a7c59;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: #4a7c59;
+            color: white;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(45deg, #4a7c59, #2c5530);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .card-image-overlay {
+            position: relative;
+            z-index: 2;
+            background: rgba(44, 85, 48, 0.7);
+            padding: 1rem;
+            border-radius: 50%;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: #2c5530;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-rating {
+            color: #ffd700;
+            margin: 0.5rem 0;
+        }
+
+        .card-price {
+            color: #4a7c59;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-container">
+                 <div class="logo">
+                    <img src="images/logo.png" alt="Halalrek Logo" style="height:40px; vertical-align:middle;">
+                    <span style="font-size:20px; font-weight:bold; margin-left:8px;">Halalrek</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a onclick="showSection('home')">Home</a></li>
+                    <li><a onclick="showSection('exploration')">Eksplorasi</a></li>
+                    <li><a onclick="showSection('order')">Order Paket Wisata</a></li>
+                    <li><a onclick="showSection('blog')">Blog</a></li>
+                    <li><a onclick="showSection('about')">Tentang Kami</a></li>
+                    <li><a onclick="showSection('contact')">Kontak</a></li>
+                    <li><a onclick="showSection('faq')">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="container">
+                    <h1>Halalrek</h1>
+                    <p class="tagline">"Jelajahi Surabaya Halal dengan Tenang, Satu Klik Aja"</p>
+                    <button class="cta-btn" onclick="showSection('exploration')">Mulai Jelajah</button>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🍲</div>
+                        <h3>Restoran Halal</h3>
+                        <p>Temukan restoran dan kuliner halal terbaik di Surabaya dengan rating dan review terpercaya</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏛️</div>
+                        <h3>Wisata Religi</h3>
+                        <p>Temukan wisata religi di Surabaya</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏨</div>
+                        <h3>Hotel</h3>
+                        <p>Pilihan akomodasi yang nyaman</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🕌</div>
+                        <h3>Musholla & Masjid</h3>
+                        <p>Lokasi musholla dan masjid terdekat dengan peta interaktif untuk memudahkan ibadah</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎒</div>
+                        <h3>Paket Wisata</h3>
+                        <p>Paket wisata religi lengkap dengan panduan islami dan pengalaman berkesan</p>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 3rem; border-radius: 15px; margin: 3rem 0; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h2 style="color: #2c5530; margin-bottom: 2rem;">Testimoni Pengguna</h2>
+                    <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 1rem;">"Halalrek sangat membantu saya menemukan tempat makan halal di Surabaya. Praktis dan terpercaya!"</p>
+                    <p style="color: #4a7c59; font-weight: bold;">- Ahmad, Jakarta</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Paket Wisata Section -->
+<section id="order" class="section">
+    <div class="container" style="max-width: 600px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <h2 style="color: #2c5530; margin-bottom: 1rem;">Order Paket Wisata</h2>
+            <p><strong>Harga Paket Wisata:</strong></p>
+            <p>Bus 12 Standard: Rp 210.000 / orang</p>
+            <p>Bus 12 Premium: Rp 260.000 / orang</p>
+            <p>Bus 35 Standard: Rp 133.000 / orang</p>
+            <p>Bus 35 Premium: Rp 183.000 / orang</p>
+        </div>
+        <form id="wisataForm">
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label for="name" style="font-weight: bold;">Nama Lengkap</label><br />
+                <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+            </div>
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label for="phone" style="font-weight: bold;">Nomor Telepon</label><br />
+                <input type="tel" id="phone" name="phone" placeholder="Masukkan nomor telepon" pattern="[0-9+ ]+" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+            </div>
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label for="origin" style="font-weight: bold;">Asal Daerah</label><br />
+                <input type="text" id="origin" name="origin" placeholder="Masukkan asal daerah" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+            </div>
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label for="busType" style="font-weight: bold;">Pilih Bus</label><br />
+                <select id="busType" name="busType" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                    <option value="" disabled selected>-- Pilih Bus --</option>
+                    <option value="bus12">Bus 12</option>
+                    <option value="bus35">Bus 35</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label style="font-weight: bold;">Pilih Paket</label><br />
+                <label><input type="radio" name="packageType" value="standard" required /> Standard</label>
+                &nbsp;&nbsp;
+                <label><input type="radio" name="packageType" value="premium" /> Premium</label>
+            </div>
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label for="quantity" style="font-weight: bold;">Jumlah Peserta</label><br />
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+            </div>
+            <div id="totalPrice" style="font-weight: bold; font-size: 1.2rem; color: #2c5530; margin-bottom: 1rem; text-align: center;">
+                Total Harga: Rp 0
+            </div>
+            <button type="submit" style="background-color: #2c5530; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 1rem;">
+                Pesan Sekarang
+            </button>
+        </form>
+    </div>
+</section>
+
+<script>
+    const hargaPaket = {
+        bus12: {
+            standard: 210000,
+            premium: 260000
+        },
+        bus35: {
+            standard: 133000,
+            premium: 183000
+        }
+    };
+
+    const form = document.getElementById('wisataForm');
+    const busTypeSelect = document.getElementById('busType');
+    const packageRadios = document.getElementsByName('packageType');
+    const quantityInput = document.getElementById('quantity');
+    const totalPriceDiv = document.getElementById('totalPrice');
+
+    function getSelectedPackage() {
+        for (const radio of packageRadios) {
+            if (radio.checked) return radio.value;
+        }
+        return null;
+    }
+
+    function updateTotalPrice() {
+        const busType = busTypeSelect.value;
+        const packageType = getSelectedPackage();
+        const quantity = parseInt(quantityInput.value) || 0;
+
+        if (busType && packageType && quantity > 0) {
+            const pricePerPerson = hargaPaket[busType][packageType];
+            const total = pricePerPerson * quantity;
+            totalPriceDiv.textContent = `Total Harga: Rp ${total.toLocaleString('id-ID')}`;
+        } else {
+            totalPriceDiv.textContent = 'Total Harga: Rp 0';
+        }
+    }
+
+    busTypeSelect.addEventListener('change', updateTotalPrice);
+    quantityInput.addEventListener('input', updateTotalPrice);
+    packageRadios.forEach(radio => radio.addEventListener('change', updateTotalPrice));
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = form.name.value.trim();
+        const phone = form.phone.value.trim();
+        const origin = form.origin.value.trim();
+        const busType = busTypeSelect.value;
+        const packageType = getSelectedPackage();
+        const quantity = parseInt(quantityInput.value);
+
+        if (!name || !phone || !origin || !busType || !packageType || quantity < 1) {
+            alert('Mohon lengkapi semua data dengan benar.');
+            return;
+        }
+
+        const pricePerPerson = hargaPaket[busType][packageType];
+        const total = pricePerPerson * quantity;
+
+        alert(
+            `Terima kasih, ${name}!\n` +
+            `Nomor Telepon: ${phone}\n` +
+            `Asal Daerah: ${origin}\n` +
+            `Bus: ${busType === 'bus12' ? 'Bus 12' : 'Bus 35'}\n` +
+            `Paket: ${packageType.charAt(0).toUpperCase() + packageType.slice(1)}\n` +
+            `Jumlah Peserta: ${quantity}\n` +
+            `Total Harga: Rp ${total.toLocaleString('id-ID')}\n\n` +
+            `Pesanan Anda telah diterima.`
+        );
+
+        form.reset();
+        updateTotalPrice();
+    });
+
+    // Inisialisasi harga saat halaman dimuat
+    updateTotalPrice();
+</script>
+            </div>
+        </section>
+
+        <!-- Exploration Section -->
+        <section id="exploration" class="section exploration">
+            <div class="container">
+                <h2 style="text-align: center; color: #2c5530; margin-bottom: 2rem;">Eksplorasi Wisata Halal</h2>
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="showContent('restaurants')">🍲 Restoran Halal</button>
+                    <button class="tab-btn" onclick="showContent('hotels')">🏨 Hotel Syariah</button>
+                    <button class="tab-btn" onclick="showContent('mosques')">🕌 Musholla & Masjid</button>
+                    <button class="tab-btn" onclick="showContent('packages')">🎒 Paket Wisata</button>
+                </div>
+
+                <div id="restaurants" class="content-section active">
+                    <div class="content-grid">
+                        <div class="content-card">
+                            <div class="card-image">🍜</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Rawon Setan</h3>
+                                <div class="card-rating">⭐⭐⭐⭐⭐ 4.8/5</div>
+                                <p>Rawon legendaris dengan cita rasa autentik Surabaya</p>
+                                <div class="card-price">Rp 25.000 - 50.000</div>
+                            </div>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-image">🍛</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Nasi Kebuli</h3>
+                                <div class="card-rating">⭐⭐⭐⭐⭐ 4.7/5</div>
+                                <p>Nasi kebuli khas Timur Tengah dengan rempah yang autentik</p>
+                                <div class="card-price">Rp 25.000 - 35.000</div>
+                            </div>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-image">🥘</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Rujak Cingur Delta</h3>
+                                <div class="card-rating">⭐⭐⭐⭐ 4.5/5</div>
+                                <p>Rujak cingur otentik dengan sambal petis khas Surabaya</p>
+                                <div class="card-price">Rp 20.000 - 35.000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hotels" class="content-section">
+                    <div class="content-grid">
+                        <div class="content-card">
+                            <div class="card-image">🏨</div>
+                            <div class="card-content">
+                                   <h3>Tempat Penginapan Terdekat di Surabaya</h3>
+                    <p>Berikut peta lokasi penginapan dan hotel di sekitar Surabaya.</p>
+                </div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d31662.336290063227!2d112.78090236657705!3d-7.264492527742054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spenginapan%20surabaya%20!5e0!3m2!1sen!2sid!4v1757144261820!5m2!1sen!2sid" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Peta Tempat Penginapan di Surabaya">
+                </iframe>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mosques" class="content-section">
+                    <div class="content-grid">
+                        <div class="content-card">
+                            <div class="card-image">🕌</div>
+                            <div class="card-content">
+                                   <h3>Tempat Ibadah Islam Terdekat di Surabaya</h3>
+                    <p>Berikut peta lokasi masjid dan tempat ibadah Islam di sekitar Surabaya.</p>
+                </div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d31662.32416360433!2d112.78090238551552!3d-7.264664670980398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1stempat%20ibadah%20islam%20di%20surabaya%20maps!5e0!3m2!1sen!2sid!4v1757142215647!5m2!1sen!2sid" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Peta Tempat Ibadah Islam di Surabaya">
+                </iframe>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="packages" class="content-section">
+                    <div class="content-grid">
+                        <div class="content-card">
+                            <div class="card-image">
+                                <img src="images/masjidalakbar.jpeg" alt="Paket Standar 12">
+                                <div class="card-image-overlay">🚐</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Paket Standar 12</h3>
+                                <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 12 orang</div>
+                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho dan kuliner di HalalBoss dalam satu paket wisata</p>
+                                <div class="card-price">Rp 210.000/orang</div>
+                            </div>
+                        </div>
+                         <div class="content-card">
+                            <div class="card-image">
+                                <img src="images/sunanampel.jpeg" alt="Paket Premium 12">
+                                <div class="card-image-overlay">🚐</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Paket Standar 12</h3>
+                                <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 12 orang</div>
+                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho, kuliner di HalalBoss dan dapatkan sarapan serta snack dalam satu paket wisata</p>
+                                <div class="card-price">Rp 260.000/orang</div>
+                            </div>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-image">
+                                <img src="images/restosurabaya.jpg" alt="Paket Standar 35">
+                                <div class="card-image-overlay">🚌</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Paket Standar 35</h3>
+                                <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 35 orang</div>
+                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho dan kuliner di HalalBoss dalam satu paket wisata</p>
+                                <div class="card-price">Rp 133.000/orang</div>
+                            </div>
+                        </div>
+                        <div class="content-card">
+                            <div class="card-image">
+                                <img src="images/masjidchengho.jpeg" alt="Paket Premium 35">
+                                <div class="card-image-overlay">🚌</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Paket Premium 35</h3>
+                                <div class="card-rating">⏱️  1 Hari | 👥 Kapasitas 35 orang</div>
+                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho, kuliner di HalalBoss dan dapatkan sarapan serta snack dalam satu paket wisata</p>
+                                <div class="card-price">Rp 183.000/orang</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="container">
+                <h2 style="text-align: center; color: #2c5530; margin-bottom: 3rem;">Blog & Artikel</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <div style="height: 200px; background: linear-gradient(45deg, #ffd700, #ffed4a); display: flex; align-items: center; justify-content: center; color: #2c5530; font-size: 2rem;">📝</div>
+                        <div style="padding: 1.5rem;">
+                            <h3 style="color: #2c5530; margin-bottom: 1rem;">5 Kuliner Halal Hits di Surabaya</h3>
+                            <p>Temukan kuliner halal terpopuler yang wajib dicoba saat berkunjung ke Surabaya.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2 style="color: #2c5530; margin-bottom: 1rem;">Tentang Kami</h2>
+                    <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Halalrek adalah sebuah portal wisata religi berbasis website yang dirancang khusus untuk memudahkan wisatawan muslim dalam menjelajahi Surabaya. Melalui Halalrek, pengguna dapat menemukan informasi lengkap mengenai wisata religi, restoran halal, hotel dan penginapan, serta lokasi musholla dan masjid terdekat yang ditampilkan dalam format interaktif dan praktis. Selain itu, Halalrek juga menyediakan berbagai pilihan paket wisata religi yang mencakup destinasi islami, kuliner halal, dan akomodasi sesuai prinsip syariah.
+
+Halalrek hadir untuk menjawab kebutuhan wisata halal yang terus berkembang, sekaligus mendukung Surabaya sebagai salah satu destinasi ramah muslim. Dengan akses berbasis website, wisatawan tidak perlu mengunduh aplikasi tambahan sehingga layanan dapat digunakan secara cepat, ringan, dan fleksibel dari berbagai perangkat. 
+</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2 style="color: #2c5530; margin-bottom: 1rem;">Kontak & Kerjasama</h2>
+                    <p>Email: emailhalalrek@gmail.com</p>
+                    <p>Instagram: @halalreksby</p>
+                    <p>WhatsApp: +62 800-0000-0000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 style="text-align: center; color: #2c5530; margin-bottom: 3rem;">FAQ</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="background: white; margin-bottom: 1rem; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                        <div style="background: #4a7c59; color: white; padding: 1.5rem;">
+                            <h3>Apa itu Halalrek?</h3>
+                        </div>
+                        <div style="padding: 1.5rem; background: #f8fdf8;">
+                            <p>Halalrek adalah portal wisata halal berbasis website yang memudahkan wisatawan muslim menjelajahi Surabaya dengan informasi restoran halal, hotel syariah, dan paket wisata islami.</p>
+                        </div>
+                    </div>
+                    <div style="background: white; margin-bottom: 1rem; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                        <div style="background: #4a7c59; color: white; padding: 1.5rem;">
+                            <h3>Apakah layanan gratis?</h3>
+                        </div>
+                        <div style="padding: 1.5rem; background: #f8fdf8;">
+                            <p>Ya, akses informasi di Halalrek sepenuhnya gratis. Anda hanya perlu membayar untuk paket wisata yang dipesan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+
+        function showContent(contentType) {
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Hide all content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected content
+            const targetContent = document.getElementById(contentType);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
+        // Set default active tab
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website Halalrek loaded successfully!');
+        });
+    </script>
+</body>
+</html>
