@@ -345,35 +345,32 @@
             </div>
         </section>
 
-        <!-- Order Paket Wisata Section -->
-<section id="order" class="section">
+       <!-- Order Paket Wisata Section -->
+<section id="order" class="section" style="font-family: Tahoma, Geneva, Verdana, sans-serif;">
     <div class="container" style="max-width: 600px; margin: 0 auto;">
         <div style="text-align: center; margin-bottom: 1.5rem;">
             <h2 style="color: #2c5530; margin-bottom: 1rem;">Order Paket Wisata</h2>
             <p><strong>Harga Paket Wisata:</strong></p>
-            <p>Bus 12 Standard: Rp 210.000 / orang</p>
-            <p>Bus 12 Premium: Rp 260.000 / orang</p>
             <p>Bus 35 Standard: Rp 133.000 / orang</p>
             <p>Bus 35 Premium: Rp 183.000 / orang</p>
         </div>
         <form id="wisataForm">
             <div style="margin-bottom: 1rem; text-align: left;">
                 <label for="name" style="font-weight: bold;">Nama Lengkap</label><br />
-                <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+                <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;" />
             </div>
             <div style="margin-bottom: 1rem; text-align: left;">
                 <label for="phone" style="font-weight: bold;">Nomor Telepon</label><br />
-                <input type="tel" id="phone" name="phone" placeholder="Masukkan nomor telepon" pattern="[0-9+ ]+" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+                <input type="tel" id="phone" name="phone" placeholder="Masukkan nomor telepon" pattern="[0-9+ ]+" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;" />
             </div>
             <div style="margin-bottom: 1rem; text-align: left;">
                 <label for="origin" style="font-weight: bold;">Asal Daerah</label><br />
-                <input type="text" id="origin" name="origin" placeholder="Masukkan asal daerah" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+                <input type="text" id="origin" name="origin" placeholder="Masukkan asal daerah" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;" />
             </div>
             <div style="margin-bottom: 1rem; text-align: left;">
                 <label for="busType" style="font-weight: bold;">Pilih Bus</label><br />
-                <select id="busType" name="busType" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                <select id="busType" name="busType" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;">
                     <option value="" disabled selected>-- Pilih Bus --</option>
-                    <option value="bus12">Bus 12</option>
                     <option value="bus35">Bus 35</option>
                 </select>
             </div>
@@ -385,12 +382,12 @@
             </div>
             <div style="margin-bottom: 1rem; text-align: left;">
                 <label for="quantity" style="font-weight: bold;">Jumlah Peserta</label><br />
-                <input type="number" id="quantity" name="quantity" min="1" value="1" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;" />
             </div>
             <div id="totalPrice" style="font-weight: bold; font-size: 1.2rem; color: #2c5530; margin-bottom: 1rem; text-align: center;">
                 Total Harga: Rp 0
             </div>
-            <button type="submit" style="background-color: #2c5530; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 1rem;">
+            <button type="submit" style="background-color: #2c5530; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 1rem; font-family: inherit;">
                 Pesan Sekarang
             </button>
         </form>
@@ -399,10 +396,6 @@
 
 <script>
     const hargaPaket = {
-        bus12: {
-            standard: 210000,
-            premium: 260000
-        },
         bus35: {
             standard: 133000,
             premium: 183000
@@ -462,7 +455,7 @@
             `Terima kasih, ${name}!\n` +
             `Nomor Telepon: ${phone}\n` +
             `Asal Daerah: ${origin}\n` +
-            `Bus: ${busType === 'bus12' ? 'Bus 12' : 'Bus 35'}\n` +
+            `Bus: Bus 35\n` +
             `Paket: ${packageType.charAt(0).toUpperCase() + packageType.slice(1)}\n` +
             `Jumlah Peserta: ${quantity}\n` +
             `Total Harga: Rp ${total.toLocaleString('id-ID')}\n\n` +
@@ -476,9 +469,6 @@
     // Inisialisasi harga saat halaman dimuat
     updateTotalPrice();
 </script>
-            </div>
-        </section>
-
         <!-- Exploration Section -->
         <section id="exploration" class="section exploration">
             <div class="container">
@@ -569,30 +559,6 @@
                     <div class="content-grid">
                         <div class="content-card">
                             <div class="card-image">
-                                <img src="images/masjidalakbar.jpeg" alt="Paket Standar 12">
-                                <div class="card-image-overlay">🚐</div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="card-title">Paket Standar 12</h3>
-                                <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 12 orang</div>
-                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho dan kuliner di HalalBoss dalam satu paket wisata</p>
-                                <div class="card-price">Rp 210.000/orang</div>
-                            </div>
-                        </div>
-                         <div class="content-card">
-                            <div class="card-image">
-                                <img src="images/sunanampel.jpeg" alt="Paket Premium 12">
-                                <div class="card-image-overlay">🚐</div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="card-title">Paket Standar 12</h3>
-                                <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 12 orang</div>
-                                <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho, kuliner di HalalBoss dan dapatkan sarapan serta snack dalam satu paket wisata</p>
-                                <div class="card-price">Rp 260.000/orang</div>
-                            </div>
-                        </div>
-                        <div class="content-card">
-                            <div class="card-image">
                                 <img src="images/restosurabaya.jpg" alt="Paket Standar 35">
                                 <div class="card-image-overlay">🚌</div>
                             </div>
@@ -600,7 +566,7 @@
                                 <h3 class="card-title">Paket Standar 35</h3>
                                 <div class="card-rating">⏱️ 1 Hari | 👥 Kapasitas 35 orang</div>
                                 <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho dan kuliner di HalalBoss dalam satu paket wisata</p>
-                                <div class="card-price">Rp 133.000/orang</div>
+                                <div class="card-price">Rp 197.000/orang</div>
                             </div>
                         </div>
                         <div class="content-card">
@@ -612,7 +578,7 @@
                                 <h3 class="card-title">Paket Premium 35</h3>
                                 <div class="card-rating">⏱️  1 Hari | 👥 Kapasitas 35 orang</div>
                                 <p>Kunjungi Masjid Ampel, Masjid Al-Akbar, Masjid Cheng Ho, kuliner di HalalBoss dan dapatkan sarapan serta snack dalam satu paket wisata</p>
-                                <div class="card-price">Rp 183.000/orang</div>
+                                <div class="card-price">Rp 255.000/orang</div>
                             </div>
                         </div>
                     </div>
@@ -732,4 +698,5 @@ Halalrek hadir untuk menjawab kebutuhan wisata halal yang terus berkembang, seka
         });
     </script>
 </body>
+
 </html>
